@@ -10,7 +10,7 @@ title: Test your (data science) work!
 <!-- markdownlint-enable MD026 -->
 
 <!-- TODO: Turn this into a tinyurl -->
-slides: `https://github.com/ericmjl/software-testing-open-source-and-data-science`
+slides: `https://tinyurl.com/test-sdm`
 
 ---
 
