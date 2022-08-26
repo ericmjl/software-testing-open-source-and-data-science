@@ -1,6 +1,8 @@
 ---
 theme: "black"
 title: Test your (data science) work!
+revealOptions:
+  transition: 'fade'
 ---
 
 <!-- markdownlint-disable MD035 -->
