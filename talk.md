@@ -28,7 +28,7 @@ revealOptions:
 - 📍 Principal Data Scientist, DSAI, Moderna
 - 🎓 ScD, MIT Biological Engineering.
 - 🧬 Inverse protein, mRNA, and molecule design.
-- 🎉 Accelerated and enriched analysis of data.
+- 🧠 Accelerated and enriched analysis of data.
 
 ---
 
