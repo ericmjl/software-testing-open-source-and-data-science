@@ -442,6 +442,47 @@ def test_func4(data):
 
 ---
 
+### 💰 Mock-up Realistic Fake Data
+
+----
+
+#### ☁️ Schema Generators
+
+<img src="https://pandera.readthedocs.io/en/stable/_static/pandera-logo.png" style="max-width: 100px; max-height: 100px">
+
+```python
+from hypothesis import given
+
+schema = pa.DataFrameSchema(...)
+
+@given(schema.strategy(3))
+def test_func1(data):
+    ...
+```
+
+----
+
+#### 🎲 Probabilistic Modelling
+
+<h4><img src="https://camo.githubusercontent.com/bcfd83328eafae3e264cd9b3e51fc92bb36ba5053cab6e2ec11f6bbf044f8a28/68747470733a2f2f63646e2e7261776769742e636f6d2f70796d632d646576732f70796d632f6d61696e2f646f63732f6c6f676f732f7376672f50794d435f62616e6e65722e737667" style="max-width: 200px; max-height: 200px"></img></h4>
+
+```python
+import pymc as pm
+
+with pm.Model() as model:
+    mu = pm.Normal("mu")
+    sigma = pm.Exponential("sigma")
+    pm.Normal("observed", mu=mu, sigma=sigma, observed=data)
+
+    idata = pm.sample()
+    idata.extend(pm.sample_posterior_predictive(idata))
+
+# idata.posterior_predictive now contains
+# simulated data that looks like your original data!
+```
+
+---
+
 ## ☁️ Philosophy
 
 Integrating testing into your work is one manifestation of _defensive programming_.
