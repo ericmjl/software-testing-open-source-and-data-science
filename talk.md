@@ -161,6 +161,14 @@ conda activate my_project
 pytest .
 ```
 
+----
+
+#### Run checks on every commit
+
+![](https://user-images.githubusercontent.com/2631566/187477558-e0076f12-bc20-4a69-bcc8-9fe6a998b360.png)
+
+Use GitHub actions to check every commit. Don't merge unless all tests pass.
+
 ---
 
 ### 💰 What benefits do I get?
