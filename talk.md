@@ -20,7 +20,7 @@ revealOptions:
 
 - 📍 Principal Data Scientist, DSAI, Moderna
 - 🎓 ScD, MIT Biological Engineering.
-- 🧬 Inverse protein, mRNA, and molecule design
+- 🧬 Inverse protein, mRNA, and molecule design.
 
 ---
 
@@ -34,7 +34,7 @@ If you write automated tests for your work, then:
 ---
 
 <!-- markdownlint-disable MD026 -->
-## also...
+## 👀 also...
 <!-- markdownlint-enable MD026 -->
 
 - Tests apply to all software.
@@ -43,7 +43,7 @@ If you write automated tests for your work, then:
 
 ---
 
-## Testing in Software
+## 💻 Testing in Software
 
 - 🤔 Why do testing?
 - 🧪 What does a test look like?
@@ -243,7 +243,7 @@ _Used to check that a system is working properly._
 ---
 
 <!-- markdownlint-disable MD026 -->
-## Hadley says...
+## 🧔‍♂️ Hadley says...
 <!-- markdownlint-enable MD026 -->
 
 <!-- markdownlint-disable MD033 -->
@@ -254,7 +254,7 @@ _You can't do data science in a GUI..._
 
 ----
 
-### Data science needs code
+### 💻 Data science needs code
 
 ```python
 >>> code == software
@@ -265,17 +265,17 @@ _...implying that you'll be writing some kind of software to do data science wor
 
 ----
 
-### Test your code
+### 👀 Test your code
 
 Testing your DS code will be good for you!
 
 ---
 
-## Testing in Data Science
+## 😎Testing in Data Science
 
 ----
 
-### 🧠 Machine Learning Model Code
+### 🧠 Testing Machine Learning Model Code
 
 ```python
 from project.models import Model
@@ -355,7 +355,7 @@ Ensure that model can be trained for at least 2 epochs.
 
 ---
 
-### 📀 Data Testing
+### 📀 Testing Data
 
 ----
 
@@ -382,6 +382,9 @@ import pandera as pa
 
 df_schema = pa.DataFrameSchema(
     columns={
+        # Declare that `some_column` must exist,
+        # that it must be integer type,
+        # and that it cannot contain any nulls.
         "some_column": pa.Column(int, nullable=False)
     }
 )
@@ -401,6 +404,41 @@ def func(df):
 Runtime validation code is abstracted out.
 
 Code is much more readable.
+
+---
+
+### 🚇 Testing Pipeline Code
+
+----
+
+#### 💡 Pipelines are functions
+
+```python
+def pipeline(data):
+    d1 = func1(data)
+    d2 = func2(d1)
+    d3 = func3(d1)
+    d4 = func4(d2, d3)
+    return outfunc(d4)
+```
+
+----
+
+#### 👆 Each unit function can be unit tested
+
+```python
+def test_func1(data):
+    ...
+
+def test_func2(data):
+    ...
+
+def test_func3(data):
+    ...
+
+def test_func4(data):
+    ...
+```
 
 ---
 
@@ -428,7 +466,7 @@ _Do unto others what you would have others do unto you._
 
 ---
 
-## Summary
+## 😎 Summary
 
 1. ✅ Write tests for your **code**.
 2. ✅ Write tests for your **data**.
