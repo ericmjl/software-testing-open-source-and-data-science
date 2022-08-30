@@ -21,6 +21,7 @@ revealOptions:
 - 📍 Principal Data Scientist, DSAI, Moderna
 - 🎓 ScD, MIT Biological Engineering.
 - 🧬 Inverse protein, mRNA, and molecule design.
+- 🎉 Accelerated and enriched analysis of data.
 
 ---
 
@@ -43,6 +44,13 @@ If you write automated tests for your work, then:
 
 ---
 
+## ⭕️ Outline
+
+- Testing in Software
+- Testing in Data Science
+
+---
+
 ## 💻 Testing in Software
 
 - 🤔 Why do testing?
@@ -56,6 +64,10 @@ If you write automated tests for your work, then:
 ### 🤔 Why do testing?
 
 Tests help falsify the hypothesis that our code _works_.
+
+----
+
+Without testing, we will have untested assumptions about whether our code works.
 
 ----
 
@@ -137,7 +149,9 @@ mamba env update -f environment.yml
 With `pytest` installed, use it to run your tests:
 
 ```bash
-pytest
+cd /path/to/my_project
+conda activate my_project
+pytest .
 ```
 
 ---
@@ -212,6 +226,8 @@ We update the test to establish new expectations.
 1. ✅ Guarantees against breaking changes.
 2. 🤔 Example-based documentation for your code.
 
+> Testing is a contract between yourself (now) and yourself (in the future).
+
 ---
 
 ### 👆 What kind of tests exist?
@@ -220,25 +236,55 @@ We update the test to establish new expectations.
 
 #### 1️⃣ Unit Test
 
-A test that checks that an individual function works correctly.
+```python
+def func1(data):
+    ...
+    return stuff
 
-_Strive to write this type of test!_
+def test_func1(data):
+    stuff = func1(data)
+    assert stuff == ...
+```
+
+_A test that checks that an individual function works correctly. Strive to write this type of test!_
 
 ----
 
 #### 2️⃣ Execution Test
 
-A test that only checks that a function executes without erroring.
+```python
+def func1(data):
+    ...
+    return stuff
 
-_Use only in a pinch._
+def test_func1(data):
+    func1(data)
+```
+
+_A test that only checks that a function executes without erroring. Use only in a pinch._
 
 ----
 
 #### 3️⃣ Integration Test
 
-A test that checks that multiple functions work correctly together.
+```python
+def func1(data):
+    ...
+    return stuff
 
-_Used to check that a system is working properly._
+def func2(data):
+    ...
+    return stuff
+
+def pipeline(data):
+    return func2(func1(data))
+
+def test_pipeline(data):
+    output = pipeline(data)
+    assert output = ...
+```
+
+_Checks that a system is working properly. Use this sparingly if the tests are long to execute!_
 
 ---
 
@@ -273,6 +319,10 @@ Testing your DS code will be good for you!
 
 ## 😎Testing in Data Science
 
+- Machine Learning Model Code
+- Data
+- Pipelines
+
 ----
 
 ### 🧠 Testing Machine Learning Model Code
@@ -305,9 +355,29 @@ of the shape that `model` accepts.
 
 #### 🤔 What can we test here?
 
-1. Our model accepts the correct inputs and outputs.
-2. Our model and datamodules work together.
-3. Our model does not fail in training loop.
+1. ___Unit test:___ `dm` produces correctly-shaped outputs when executed.
+2. ___Unit test:___ Given random inputs, `model` produces correctly-shaped outputs.
+3. ___Integration test:___ Given `dm` outputs, `model` produces correctly-shaped outputs.
+4. ___Execution test:___ `model` does not fail in training loop with `trainer` and `dm`.
+
+----
+
+#### 🟩 DataModule output shapes
+
+```python
+def test_datamodule_shapes():
+    # Arrange
+    batch_size = 3
+    input_dims = 4
+    dm = DataModule(batch_size=batch_size)
+
+    # Act
+    x, y = next(iter(dm.train_loader()))
+
+    # Assert
+    assert x.shape == (batch_size, data_dims)
+    assert y.shape == (batch_size, 1)
+```
 
 ----
 
@@ -317,12 +387,17 @@ of the shape that `model` accepts.
 from jax import random, vmap, numpy as np
 
 def test_model_shapes():
+    # Arrange
     key = random.PRNGKey(55)
-    num_samples = 7
-    num_input_dims = 211
-    inputs = random.normal(shape=(num_samples, num_input_dims))
-    model = Model(num_input_dims=num_input_dims)
+    batch_size = 3
+    input_dims = 4
+    inputs = random.normal(shape=(num_samples, input_dims))
+    model = Model(input_dims=input_dims)
+
+    # Act
     outputs = vmap(model)(inputs)
+
+    # Assert
     assert outputs.shape == (num_samples, 1)
 ```
 
@@ -332,11 +407,16 @@ def test_model_shapes():
 
 ```python
 def test_model_datamodule_compatibility():
+    # Arrange
     dm = DataModule()
     model = Model()
     x, y = next(iter(dm.train_dataloader()))
+
+    # Act
     pred = vmap(model)(x)
-    assert x.shape == y.shape
+
+    # Assert
+    assert pred.shape == y.shape
 ```
 
 ----
@@ -345,17 +425,20 @@ def test_model_datamodule_compatibility():
 
 ```python
 def test_model():
+    # Arrange
     model = Model()
     dm = DataModule()
     trainer = default_trainer(epochs=2)
+
+    # Act
     trainer.fit(model, dm)
 ```
-
-Ensure that model can be trained for at least 2 epochs.
 
 ---
 
 ### 📀 Testing Data
+
+_a.k.a. Data Validation_
 
 ----
 
@@ -396,7 +479,7 @@ df_schema = pa.DataFrameSchema(
 
 ```python
 def func(df):
-    df_schema.validate(df)
+    df = df_schema.validate(df)
     # The rest of the logic
     ...
 ```
@@ -415,11 +498,13 @@ Code is much more readable.
 
 ```python
 def pipeline(data):
+    data = df_schema.validate(data)
     d1 = func1(data)
     d2 = func2(d1)
     d3 = func3(d1)
     d4 = func4(d2, d3)
-    return outfunc(d4)
+    output = outfunc(d4)
+    return output_schema.validate(output)
 ```
 
 ----
@@ -439,6 +524,28 @@ def test_func3(data):
 def test_func4(data):
     ...
 ```
+
+----
+
+#### 🤝 The whole pipeline can be integration tested
+
+```python
+def test_pipeline()
+    # Arrange
+    data = pd.DataFrame(...)
+
+    # Act
+    output = pipeline(data)
+
+    # Assert
+    assert output = ...
+```
+
+_We assume your pipeline is quick to run._
+
+---
+
+### 🕓 One more thing
 
 ---
 
@@ -509,9 +616,9 @@ _Do unto others what you would have others do unto you._
 
 ## 😎 Summary
 
-1. ✅ Write tests for your **code**.
-2. ✅ Write tests for your **data**.
-3. ✅ Write tests for your **models**.
+1. ✅ Write tests for your __code__.
+2. ✅ Write tests for your __data__.
+3. ✅ Write tests for your __models__.
 
 ---
 
