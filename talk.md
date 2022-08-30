@@ -16,6 +16,13 @@ revealOptions:
 
 ---
 
+## 🤔 My goals today
+
+- To share hard-won lessons borne out of failures in my past.
+- To encourage you to embrace testing as part of your workflow.
+
+---
+
 ## 🙋🏻‍♂️ `whoami`
 
 - 📍 Principal Data Scientist, DSAI, Moderna
@@ -611,6 +618,30 @@ Others can:
 - Understand where their assumptions may be incorrect.
 
 _Do unto others what you would have others do unto you._
+
+---
+
+## 💡 Resources
+
+<table>
+<tr>
+<td>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7NEQApSLT1U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br>
+<small>How Software Skillsets Will Accelerate Your Data Science Work</small>
+</td>
+<td>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Dx2vG6qmtPs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br>
+<small>Principled Data Science Workflows</small>
+</td>
+<td>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5RKuHvZERLY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br>
+<small>Testing Data Science Code</small>
+</td>
+</tr>
+</table>
 
 ---
 
