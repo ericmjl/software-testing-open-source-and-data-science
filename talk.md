@@ -8,7 +8,7 @@ revealOptions:
 <!-- markdownlint-disable MD035 -->
 <!-- markdownlint-disable MD025 -->
 <!-- markdownlint-disable MD026 -->
-# Test your work!
+# Software Testing in Open Source and Data Science!
 <!-- markdownlint-enable MD026 -->
 
 <!-- TODO: Turn this into a tinyurl -->
