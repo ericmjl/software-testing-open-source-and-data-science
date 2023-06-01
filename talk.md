@@ -14,6 +14,8 @@ revealOptions:
 <!-- TODO: Turn this into a tinyurl -->
 `https://tinyurl.com/test-sdm`
 
+<small>Eric J. Ma</small>
+
 ---
 
 ## 🤔 My goals today
